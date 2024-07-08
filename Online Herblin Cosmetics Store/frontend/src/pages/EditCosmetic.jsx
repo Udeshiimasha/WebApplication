@@ -4,6 +4,7 @@ import Spinner from '../components/Spinner';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import img from '../assets/images/wallpaper7.jpg';
 
 const EditCosmetic = () => {
   const [item, setItem] = useState('');
@@ -45,7 +46,7 @@ const EditCosmetic = () => {
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Cosmetic Created successfully', { variant: 'success' });
-        navigate('/');
+        navigate('/home');
       })
       .catch((error) => {
         setLoading(false);
@@ -56,9 +57,10 @@ const EditCosmetic = () => {
   };
 
   return (
+    <div style={{ backgroundImage: `url(${img})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh' }}>
     <div className='p-4'>
       <BackButton />
-      <h1 className='text-3xl my-4'>Edit Cosmetic</h1>
+      <h1 className='text-4xl my-4'>Edit Cosmetic</h1>
       {loading ? <Spinner /> : ''}
       <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
         <div className='my-4'>
@@ -97,10 +99,11 @@ const EditCosmetic = () => {
             className='border-2 border-gray-500 px-4 py-2  w-full '
           />
         </div>
-        <button className='p-2 bg-sky-300 m-8' onClick={handleEditCosmetic}>
+        <button className='p-2 bg-sky-500 m-8' onClick={handleEditCosmetic}>
           Save
         </button>
       </div>
+    </div>
     </div>
   );
 }
