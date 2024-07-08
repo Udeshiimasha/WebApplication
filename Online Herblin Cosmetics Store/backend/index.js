@@ -1,7 +1,7 @@
-import express from "express";
+import express, { request, response } from "express";
 import {PORT, mongoDBURL} from "./config.js";
 import mongoose from 'mongoose';
-//import {Cosmetic} from './models/cosmeticsModel.js';
+import usersRoute from './routes/usersRoute.js';
 import cosmeticsRoute from './routes/cosmeticsRoute.js';
 import cors from 'cors';
 
@@ -12,14 +12,6 @@ app.use(express.json());
 
 //Middleware for handling CORS POLICY
 app.use(cors());
-//app.use(
-//   cors({
-//        origin: 'http://localhost:3000',
-//        methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//        allowedHeaders: ['Content-Type'],
-//    })
-//);
-
 
 app.get('/', (request, response) => {
     console.log(request)
@@ -27,6 +19,7 @@ app.get('/', (request, response) => {
 });
 
 app.use('/cosmetics', cosmeticsRoute);
+app.use('/users', usersRoute);
 
 mongoose
     .connect(mongoDBURL)
